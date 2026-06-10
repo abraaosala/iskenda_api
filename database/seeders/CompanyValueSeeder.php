@@ -7,9 +7,6 @@ use Illuminate\Database\Seeder;
 
 class CompanyValueSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $values = [
