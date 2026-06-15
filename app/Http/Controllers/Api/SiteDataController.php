@@ -19,8 +19,18 @@ use App\Models\GalleryItem;
 use App\Models\Service;
 use App\Models\TeamMember;
 
+/**
+ * Dados públicos do site (não requer autenticação).
+ */
 class SiteDataController extends Controller
 {
+    /**
+     * Dados públicos do site.
+     *
+     * Retorna todas as informações públicas necessárias para renderizar o site institucional,
+     * incluindo dados da empresa, serviços, clientes, cursos, ofertas académicas,
+     * valores, equipa e galeria.
+     */
     public function __invoke(): array
     {
         $company = CompanyInfo::first();

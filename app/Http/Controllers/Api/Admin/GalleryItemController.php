@@ -10,8 +10,16 @@ use App\Models\GalleryItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Gestão da galeria.
+ */
 class GalleryItemController extends Controller
 {
+    /**
+     * Listar itens da galeria.
+     *
+     * Retorna todos os itens da galeria ordenados por ordem de apresentação.
+     */
     public function index(): AnonymousResourceCollection
     {
         return GalleryItemResource::collection(
@@ -19,6 +27,11 @@ class GalleryItemController extends Controller
         );
     }
 
+    /**
+     * Criar item na galeria.
+     *
+     * Adiciona um novo item à galeria. Opcionalmente, permite o upload de um ficheiro de imagem.
+     */
     public function store(StoreGalleryItemRequest $request): GalleryItemResource
     {
         $data = $request->validated();
@@ -32,11 +45,21 @@ class GalleryItemController extends Controller
         return new GalleryItemResource(GalleryItem::create($data));
     }
 
+    /**
+     * Visualizar item da galeria.
+     *
+     * Retorna os detalhes de um item específico da galeria.
+     */
     public function show(GalleryItem $galleryItem): GalleryItemResource
     {
         return new GalleryItemResource($galleryItem);
     }
 
+    /**
+     * Atualizar item da galeria.
+     *
+     * Atualiza os dados de um item existente. Opcionalmente, permite alterar o ficheiro de imagem.
+     */
     public function update(UpdateGalleryItemRequest $request, GalleryItem $galleryItem): GalleryItemResource
     {
         $data = $request->validated();
@@ -52,6 +75,11 @@ class GalleryItemController extends Controller
         return new GalleryItemResource($galleryItem->fresh());
     }
 
+    /**
+     * Remover item da galeria.
+     *
+     * Elimina um item da galeria.
+     */
     public function destroy(GalleryItem $galleryItem): JsonResponse
     {
         $galleryItem->delete();

@@ -10,8 +10,16 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Gestão de cursos.
+ */
 class CourseController extends Controller
 {
+    /**
+     * Listar cursos.
+     *
+     * Retorna todos os cursos ordenados por ordem de apresentação.
+     */
     public function index(): AnonymousResourceCollection
     {
         return CourseResource::collection(
@@ -19,16 +27,31 @@ class CourseController extends Controller
         );
     }
 
+    /**
+     * Criar curso.
+     *
+     * Adiciona um novo curso à academia.
+     */
     public function store(StoreCourseRequest $request): CourseResource
     {
         return new CourseResource(Course::create($request->validated()));
     }
 
+    /**
+     * Visualizar curso.
+     *
+     * Retorna os detalhes de um curso específico.
+     */
     public function show(Course $course): CourseResource
     {
         return new CourseResource($course);
     }
 
+    /**
+     * Atualizar curso.
+     *
+     * Atualiza os dados de um curso existente.
+     */
     public function update(UpdateCourseRequest $request, Course $course): CourseResource
     {
         $course->update($request->validated());
@@ -36,6 +59,11 @@ class CourseController extends Controller
         return new CourseResource($course->fresh());
     }
 
+    /**
+     * Remover curso.
+     *
+     * Elimina um curso da academia.
+     */
     public function destroy(Course $course): JsonResponse
     {
         $course->delete();
