@@ -10,8 +10,16 @@ use App\Models\TeamMember;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Gestão de membros da equipa.
+ */
 class TeamMemberController extends Controller
 {
+    /**
+     * Listar membros da equipa.
+     *
+     * Retorna todos os membros da equipa ordenados por ordem de apresentação.
+     */
     public function index(): AnonymousResourceCollection
     {
         return TeamMemberResource::collection(
@@ -19,6 +27,11 @@ class TeamMemberController extends Controller
         );
     }
 
+    /**
+     * Criar membro da equipa.
+     *
+     * Adiciona um novo membro à equipa. Opcionalmente, permite o upload da foto.
+     */
     public function store(StoreTeamMemberRequest $request): TeamMemberResource
     {
         $data = $request->validated();
@@ -34,11 +47,21 @@ class TeamMemberController extends Controller
         return new TeamMemberResource(TeamMember::create($data));
     }
 
+    /**
+     * Visualizar membro da equipa.
+     *
+     * Retorna os detalhes de um membro específico.
+     */
     public function show(TeamMember $teamMember): TeamMemberResource
     {
         return new TeamMemberResource($teamMember);
     }
 
+    /**
+     * Atualizar membro da equipa.
+     *
+     * Atualiza os dados de um membro existente. Opcionalmente, permite alterar a foto.
+     */
     public function update(UpdateTeamMemberRequest $request, TeamMember $teamMember): TeamMemberResource
     {
         $data = $request->validated();
@@ -52,6 +75,11 @@ class TeamMemberController extends Controller
         return new TeamMemberResource($teamMember->fresh());
     }
 
+    /**
+     * Remover membro da equipa.
+     *
+     * Elimina um membro da equipa.
+     */
     public function destroy(TeamMember $teamMember): JsonResponse
     {
         $teamMember->delete();

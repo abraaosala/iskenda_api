@@ -10,8 +10,17 @@ use App\Models\GalleryItem;
 use App\Models\Service;
 use App\Models\TeamMember;
 
+/**
+ * Painel administrativo.
+ */
 class DashboardController extends Controller
 {
+    /**
+     * Resumo do painel.
+     *
+     * Retorna estatísticas gerais (contagem de serviços, clientes, membros da equipa, itens da galeria)
+     * e os últimos 5 contactos recebidos.
+     */
     public function __invoke(): array
     {
         return [

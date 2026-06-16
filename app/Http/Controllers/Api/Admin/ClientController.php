@@ -10,8 +10,16 @@ use App\Models\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Gestão de clientes.
+ */
 class ClientController extends Controller
 {
+    /**
+     * Listar clientes.
+     *
+     * Retorna todos os clientes ordenados por ordem de apresentação.
+     */
     public function index(): AnonymousResourceCollection
     {
         return ClientResource::collection(
@@ -19,6 +27,11 @@ class ClientController extends Controller
         );
     }
 
+    /**
+     * Criar cliente.
+     *
+     * Adiciona um novo cliente ao portfólio. Opcionalmente, permite o upload do logótipo.
+     */
     public function store(StoreClientRequest $request): ClientResource
     {
         $data = $request->validated();
@@ -30,11 +43,21 @@ class ClientController extends Controller
         return new ClientResource(Client::create($data));
     }
 
+    /**
+     * Visualizar cliente.
+     *
+     * Retorna os detalhes de um cliente específico.
+     */
     public function show(Client $client): ClientResource
     {
         return new ClientResource($client);
     }
 
+    /**
+     * Atualizar cliente.
+     *
+     * Atualiza os dados de um cliente existente. Opcionalmente, permite alterar o logótipo.
+     */
     public function update(UpdateClientRequest $request, Client $client): ClientResource
     {
         $data = $request->validated();
@@ -48,6 +71,11 @@ class ClientController extends Controller
         return new ClientResource($client->fresh());
     }
 
+    /**
+     * Remover cliente.
+     *
+     * Elimina um cliente do portfólio.
+     */
     public function destroy(Client $client): JsonResponse
     {
         $client->delete();

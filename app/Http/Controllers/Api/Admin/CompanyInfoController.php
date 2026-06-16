@@ -7,8 +7,16 @@ use App\Http\Requests\Api\Admin\UpdateCompanyInfoRequest;
 use App\Models\CompanyInfo;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Gestão de informações da empresa.
+ */
 class CompanyInfoController extends Controller
 {
+    /**
+     * Visualizar informações da empresa.
+     *
+     * Retorna os dados institucionais da empresa. Se não existirem, retorna os valores padrão.
+     */
     public function show()
     {
         $info = CompanyInfo::first();
@@ -32,6 +40,12 @@ class CompanyInfoController extends Controller
         return response()->json($this->format($info));
     }
 
+    /**
+     * Atualizar informações da empresa.
+     *
+     * Atualiza os dados institucionais da empresa. Opcionalmente, permite o upload do logótipo,
+     * favicon e imagem de herói.
+     */
     public function update(UpdateCompanyInfoRequest $request)
     {
         $info = CompanyInfo::first();

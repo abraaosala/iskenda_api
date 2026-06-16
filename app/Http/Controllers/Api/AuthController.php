@@ -11,8 +11,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * Autenticação de administradores.
+ */
 class AuthController extends Controller
 {
+    /**
+     * Login do administrador.
+     *
+     * Autentica o administrador e retorna um token de acesso Sanctum (Bearer Token)
+     * juntamente com os dados do utilizador.
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
@@ -31,6 +40,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Terminar sessão.
+     *
+     * Invalida o token de acesso atual do administrador.
+     */
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
@@ -38,6 +52,11 @@ class AuthController extends Controller
         return response()->json(['message' => 'Sessão terminada com sucesso.']);
     }
 
+    /**
+     * Dados do utilizador autenticado.
+     *
+     * Retorna as informações do administrador atualmente autenticado.
+     */
     public function me(Request $request): UserResource
     {
         return new UserResource($request->user());
