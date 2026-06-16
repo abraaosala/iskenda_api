@@ -105,7 +105,7 @@ jobs:
       - name: Deploy via rsync
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: -rlpDzvc --delete --exclude-from=.rsync-exclude
           SOURCE: .
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
@@ -117,7 +117,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd domains/iskenda.ao/public_html/api/iskenda
             php artisan migrate --force
