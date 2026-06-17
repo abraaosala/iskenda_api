@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -65,66 +65,4 @@ jobs:
       - name: Run tests
         run: php artisan test --compact
 
-  deploy:
-    needs: [lint, test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          extensions: mbstring, pdo_mysql, dom, fileinfo, xml, curl, gd
-          tools: composer:v2
-          coverage: none
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: composer-prod-${{ hashFiles('composer.lock') }}
-
-      - name: Install production dependencies
-        uses: ramsey/composer-install@v3
-        with:
-          composer-options: --no-dev --optimize-autoloader
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-
-      - name: Build frontend assets
-        run: |
-          npm ci
-          npm run build
-
-      - name: Deploy via rsync
-        uses: easingthemes/ssh-deploy@v5.1.0
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: -rlpDzvc --delete --exclude-from=.rsync-exclude
-          SOURCE: .
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          REMOTE_PORT: ${{ secrets.SSH_PORT }}
-          TARGET: domains/iskenda.ao/public_html/api/iskenda
-
-      - name: Post-deploy commands
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd domains/iskenda.ao/public_html/api/iskenda
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-            php artisan optimize
-            php artisan queue:restart 2>/dev/null || true
