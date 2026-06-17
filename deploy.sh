@@ -11,6 +11,8 @@ export COMPOSER_PROCESS_TIMEOUT=0
 
 composer install --no-dev --optimize-autoloader --no-interaction
 
+[ -L public/storage ] || ln -s "$DIR/storage/app/public" "$DIR/public/storage"
+
 php artisan migrate --force
 
 php artisan route:cache
