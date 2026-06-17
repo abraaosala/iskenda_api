@@ -15,6 +15,5 @@ php artisan migrate --force
 
 php artisan route:cache
 php artisan view:cache
-php artisan optimize
 
 php artisan queue:restart 2>/dev/null || true
