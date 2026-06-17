@@ -89,6 +89,7 @@ class CompanyInfoController extends Controller
             'logo' => $info->logo ? asset('storage/'.$info->logo) : null,
             'favicon' => $info->favicon ? asset('storage/'.$info->favicon) : null,
             'hero_image' => $info->hero_image ? asset('storage/'.$info->hero_image) : null,
+            'social_links' => $info->social_links ?? [],
         ]);
     }
 }

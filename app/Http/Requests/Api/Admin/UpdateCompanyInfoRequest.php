@@ -11,6 +11,15 @@ class UpdateCompanyInfoRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('social_links') && is_string($this->input('social_links'))) {
+            $this->merge([
+                'social_links' => json_decode($this->input('social_links'), true),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [
@@ -28,6 +37,10 @@ class UpdateCompanyInfoRequest extends FormRequest
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'favicon' => ['nullable', 'mimes:jpg,jpeg,png,webp,ico', 'max:1024'],
             'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'social_links' => ['nullable', 'array'],
+            'social_links.*.platform' => ['required_with:social_links', 'string', 'max:50'],
+            'social_links.*.icon' => ['required_with:social_links', 'string', 'max:50'],
+            'social_links.*.url' => ['required_with:social_links', 'url', 'max:500'],
         ];
     }
 }

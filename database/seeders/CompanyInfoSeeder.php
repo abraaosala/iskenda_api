@@ -23,6 +23,11 @@ class CompanyInfoSeeder extends Seeder
                 'address' => 'Luanda, Angola',
                 'copyright' => '© 2026 IS KENDA CONSULTORIA & ACADEMIA. Todos os Direitos Reservados.',
                 'logo' => 'uploads/company/iVfusEmivKcrXCgKTVgiQxWCOoh9Pe0ExSZf2Lzq.png',
+                'social_links' => json_encode([
+                    ['platform' => 'Instagram', 'icon' => 'Instagram', 'url' => 'https://www.instagram.com/geraliskenda/'],
+                    ['platform' => 'Facebook', 'icon' => 'Facebook', 'url' => 'https://www.facebook.com/geraliskenda/'],
+                    ['platform' => 'LinkedIn', 'icon' => 'Linkedin', 'url' => 'https://ao.linkedin.com/in/academia-is-kenda-71a309370'],
+                ]),
             ],
         ];
 
