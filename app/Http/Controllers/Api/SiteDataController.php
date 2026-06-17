@@ -51,6 +51,7 @@ class SiteDataController extends Controller
                 'logo' => $company->logo ? asset('storage/'.$company->logo) : null,
                 'favicon' => $company->favicon ? asset('storage/'.$company->favicon) : null,
                 'heroImage' => $company->hero_image ? asset('storage/'.$company->hero_image) : null,
+                'socialLinks' => $company->social_links ?? [],
             ] : [
                 'name' => 'IS KENDA',
                 'fullName' => 'IS KENDA CONSULTORIA & ACADEMIA',
@@ -66,6 +67,7 @@ class SiteDataController extends Controller
                 'logo' => null,
                 'favicon' => null,
                 'heroImage' => null,
+                'socialLinks' => [],
             ],
             'services' => ServiceResource::collection(
                 Service::orderBy('sort_order')->get()
