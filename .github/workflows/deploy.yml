@@ -110,6 +110,7 @@ jobs:
           SOURCE: .
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
           TARGET: domains/iskenda.ao/public_html/api/iskenda
 
       - name: Post-deploy commands
@@ -117,6 +118,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd domains/iskenda.ao/public_html/api/iskenda
