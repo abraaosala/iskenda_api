@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -60,5 +62,49 @@ class AuthController extends Controller
     public function me(Request $request): UserResource
     {
         return new UserResource($request->user());
+    }
+
+    /**
+     * Atualizar perfil.
+     *
+     * Atualiza o nome e email do administrador autenticado.
+     * Retorna um novo token caso o email tenha sido alterado.
+     */
+    public function updateProfile(UpdateProfileRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $emailChanged = $user->email !== $request->email;
+
+        $user->update($request->validated());
+
+        if ($emailChanged) {
+            $user->tokens()->delete();
+            $token = $user->createToken('auth-token')->plainTextToken;
+        }
+
+        return response()->json([
+            'user' => new UserResource($user),
+            'token' => $token ?? null,
+        ]);
+    }
+
+    /**
+     * Alterar palavra-passe.
+     *
+     * Valida a palavra-passe atual e atualiza para a nova.
+     */
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
+    {
+        $user = $request->user();
+
+        if (! Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['A palavra-passe actual está incorrecta.'],
+            ]);
+        }
+
+        $user->update(['password' => Hash::make($request->password)]);
+
+        return response()->json(['message' => 'Palavra-passe alterada com sucesso.']);
     }
 }
