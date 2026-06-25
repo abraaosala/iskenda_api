@@ -35,6 +35,7 @@ class UpdateCompanyInfoRequest extends FormRequest
             'address' => ['required', 'string', 'max:500'],
             'copyright' => ['required', 'string', 'max:500'],
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'logo_scroll' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'favicon' => ['nullable', 'mimes:jpg,jpeg,png,webp,ico', 'max:1024'],
             'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'social_links' => ['nullable', 'array'],

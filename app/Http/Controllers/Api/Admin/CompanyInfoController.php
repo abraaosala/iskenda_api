@@ -63,6 +63,13 @@ class CompanyInfoController extends Controller
             $data['logo'] = $request->file('logo')->store('uploads/company', 'public');
         }
 
+        if ($request->hasFile('logo_scroll')) {
+            if ($info->logo_scroll) {
+                Storage::disk('public')->delete($info->logo_scroll);
+            }
+            $data['logo_scroll'] = $request->file('logo_scroll')->store('uploads/company', 'public');
+        }
+
         if ($request->hasFile('favicon')) {
             if ($info->favicon) {
                 Storage::disk('public')->delete($info->favicon);
@@ -87,6 +94,7 @@ class CompanyInfoController extends Controller
     {
         return array_merge($info->toArray(), [
             'logo' => $info->logo ? asset('storage/'.$info->logo) : null,
+            'logo_scroll' => $info->logo_scroll ? asset('storage/'.$info->logo_scroll) : null,
             'favicon' => $info->favicon ? asset('storage/'.$info->favicon) : null,
             'hero_image' => $info->hero_image ? asset('storage/'.$info->hero_image) : null,
             'social_links' => $info->social_links ?? [],
