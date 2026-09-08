@@ -21,6 +21,7 @@ class ClientResource extends JsonResource
             'colorClass' => $this->color_class,
             'logo' => $this->logo ? asset('storage/'.$this->logo) : null,
             'sortOrder' => $this->sort_order,
+            'isVisible' => $this->is_visible,
         ];
     }
 }

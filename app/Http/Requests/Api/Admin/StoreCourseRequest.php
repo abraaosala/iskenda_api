@@ -21,6 +21,7 @@ class StoreCourseRequest extends FormRequest
             'modules' => ['nullable', 'array'],
             'modules.*' => ['required', 'string'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }
