@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\CourseController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\GalleryItemController;
 use App\Http\Controllers\Api\Admin\ServiceController;
+use App\Http\Controllers\Api\Admin\SiteSectionController;
 use App\Http\Controllers\Api\Admin\TeamMemberController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
@@ -36,5 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
         Route::get('company-info', [CompanyInfoController::class, 'show']);
         Route::put('company-info', [CompanyInfoController::class, 'update']);
+        Route::get('site-sections', [SiteSectionController::class, 'index']);
+        Route::put('site-sections', [SiteSectionController::class, 'update']);
     });
 });
