@@ -19,6 +19,7 @@ class StoreClientRequest extends FormRequest
             'color_class' => ['sometimes', 'required', 'string', 'max:100'],
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }

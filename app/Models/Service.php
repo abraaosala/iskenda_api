@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['title', 'description', 'icon', 'features', 'sort_order'])]
+#[Fillable(['title', 'description', 'icon', 'features', 'sort_order', 'is_visible'])]
 class Service extends Model
 {
     /** @use HasFactory<ServiceFactory> */
@@ -17,6 +17,7 @@ class Service extends Model
     {
         return [
             'features' => 'array',
+            'is_visible' => 'boolean',
         ];
     }
 }

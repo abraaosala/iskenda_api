@@ -20,6 +20,7 @@ class StoreServiceRequest extends FormRequest
             'features' => ['nullable', 'array'],
             'features.*' => ['required', 'string'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }

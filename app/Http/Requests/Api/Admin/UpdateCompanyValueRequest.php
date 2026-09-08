@@ -18,6 +18,7 @@ class UpdateCompanyValueRequest extends FormRequest
             'description' => ['sometimes', 'required', 'string'],
             'icon' => ['sometimes', 'required', 'string', 'max:100'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }
