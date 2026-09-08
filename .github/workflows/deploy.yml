@@ -100,7 +100,7 @@ jobs:
 
       - name: Health check pós-deploy
         run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://api.iskenda.ao/)
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 30 https://api.iskenda.ao/)
           if [ "$code" != "200" ]; then
             echo "Health check falhou: HTTP $code"
             exit 1
