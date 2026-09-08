@@ -20,6 +20,7 @@ class CompanyValueResource extends JsonResource
             'description' => $this->description,
             'icon' => $this->icon,
             'sortOrder' => $this->sort_order,
+            'isVisible' => $this->is_visible,
         ];
     }
 }

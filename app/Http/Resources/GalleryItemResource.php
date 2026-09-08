@@ -24,6 +24,7 @@ class GalleryItemResource extends JsonResource
                 ? (str_starts_with($this->src, 'http') ? $this->src : asset('storage/'.$this->src))
                 : null,
             'sortOrder' => $this->sort_order,
+            'isVisible' => $this->is_visible,
         ];
     }
 }

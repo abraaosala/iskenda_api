@@ -18,6 +18,7 @@ class AcademyOfferResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'icon' => $this->icon,
+            'isVisible' => $this->is_visible,
         ];
     }
 }

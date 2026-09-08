@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['title', 'category', 'gradient', 'icon', 'src', 'sort_order'])]
+#[Fillable(['title', 'category', 'gradient', 'icon', 'src', 'sort_order', 'is_visible'])]
 class GalleryItem extends Model
 {
     /** @use HasFactory<GalleryItemFactory> */
     use HasFactory;
+
+    protected function casts(): array
+    {
+        return [
+            'is_visible' => 'boolean',
+        ];
+    }
 }

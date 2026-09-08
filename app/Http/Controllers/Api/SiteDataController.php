@@ -72,25 +72,25 @@ class SiteDataController extends Controller
                 'socialLinks' => [],
             ],
             'services' => ServiceResource::collection(
-                Service::orderBy('sort_order')->get()
+                Service::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'clients' => ClientResource::collection(
-                Client::orderBy('sort_order')->get()
+                Client::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'courses' => CourseResource::collection(
-                Course::orderBy('sort_order')->get()
+                Course::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'academyOffers' => AcademyOfferResource::collection(
-                AcademyOffer::orderBy('sort_order')->get()
+                AcademyOffer::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'values' => CompanyValueResource::collection(
-                CompanyValue::orderBy('sort_order')->get()
+                CompanyValue::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'team' => TeamMemberResource::collection(
-                TeamMember::orderBy('sort_order')->get()
+                TeamMember::where('is_visible', true)->orderBy('sort_order')->get()
             ),
             'gallery' => GalleryItemResource::collection(
-                GalleryItem::orderBy('sort_order')->get()
+                GalleryItem::where('is_visible', true)->orderBy('sort_order')->get()
             ),
         ];
     }

@@ -21,6 +21,7 @@ class StoreGalleryItemRequest extends FormRequest
             'src' => ['nullable', 'string', 'max:2048'],
             'src_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }

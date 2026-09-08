@@ -18,6 +18,7 @@ class StoreCompanyValueRequest extends FormRequest
             'description' => ['required', 'string'],
             'icon' => ['required', 'string', 'max:100'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'is_visible' => ['sometimes', 'boolean'],
         ];
     }
 }

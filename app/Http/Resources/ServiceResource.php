@@ -21,6 +21,7 @@ class ServiceResource extends JsonResource
             'icon' => $this->icon,
             'features' => $this->features,
             'sortOrder' => $this->sort_order,
+            'isVisible' => $this->is_visible,
         ];
     }
 }

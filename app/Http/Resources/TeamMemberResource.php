@@ -25,6 +25,7 @@ class TeamMemberResource extends JsonResource
             'icon' => $this->icon,
             'photo' => $this->photo ? asset('storage/'.$this->photo) : null,
             'sortOrder' => $this->sort_order,
+            'isVisible' => $this->is_visible,
         ];
     }
 }
