@@ -17,6 +17,7 @@ use App\Models\CompanyValue;
 use App\Models\Course;
 use App\Models\GalleryItem;
 use App\Models\Service;
+use App\Models\SiteSection;
 use App\Models\TeamMember;
 
 /**
@@ -92,6 +93,29 @@ class SiteDataController extends Controller
             'gallery' => GalleryItemResource::collection(
                 GalleryItem::where('is_visible', true)->orderBy('sort_order')->get()
             ),
+            'sections' => $this->sections(),
         ];
+    }
+
+    /**
+     * Mapa de visibilidade das secções da homepage.
+     *
+     * @return array<string, bool>
+     */
+    private function sections(): array
+    {
+        $defaults = [
+            'inicio', 'quem-somos', 'equipa', 'valores',
+            'servicos', 'academia', 'honorarios', 'clientes',
+            'galeria', 'contactos',
+        ];
+
+        $sections = array_fill_keys($defaults, true);
+
+        foreach (SiteSection::orderBy('sort_order')->get() as $section) {
+            $sections[$section->key] = (bool) $section->is_visible;
+        }
+
+        return $sections;
     }
 }
