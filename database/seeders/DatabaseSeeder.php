@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             GalleryItemSeeder::class,
             ServiceSeeder::class,
+            SiteSectionSeeder::class,
             TeamMemberSeeder::class,
             UserSeeder::class,
         ]);
