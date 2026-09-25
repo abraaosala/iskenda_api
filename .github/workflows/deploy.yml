@@ -81,7 +81,7 @@ jobs:
           script_stop: true
           script: |
             set -e
-            cd /home/u634834160/domains/iskenda.ao/public_html/api/iskenda
+            cd /home/u634834160/domains/iskenda.ao/public_html/api/
 
             export COMPOSER_PROCESS_TIMEOUT=0
 
