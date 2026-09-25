@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# 1. Se a requisição já for para a pasta dist, não faz nada
+RewriteRule ^public/ - [L]
+
+# 2. Redireciona todas as requisições para dentro da pasta dist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]
+
+# 3. Se o usuário acessar a home (raiz), aponta para dist
+RewriteRule ^$ public/ [L]
